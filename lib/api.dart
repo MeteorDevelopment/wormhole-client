@@ -12,7 +12,7 @@ const _apiUrl = "api.wormhole.club";
 WebSocketChannel? channel;
 
 Future<dynamic> apiPost(String path, Object? body) async {
-  final res = await http.post(Uri.parse("http://$_apiUrl$path"), body: body);
+  final res = await http.post(Uri.parse("https://$_apiUrl$path"), body: body);
   final json = jsonDecode(res.body);
 
   if (res.statusCode != 202) {
