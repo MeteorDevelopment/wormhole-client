@@ -27,7 +27,7 @@ Future<void> connectChannel() async {
 
   try {
     log.info("Connecting to web socket");
-    channel = IOWebSocketChannel.connect(Uri.parse("ws://$_apiUrl/connect"), headers: { "Authorization": container.read(tokenProvider) });
+    channel = WebSocketChannel.connect(Uri.parse("ws://$_apiUrl/connect?token=${container.read(tokenProvider)}"));
 
     await channel!.ready;
     log.info("Connected");
