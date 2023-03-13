@@ -32,8 +32,11 @@ jobs:
         if: ${{ runner.os == 'macOS' }}
         run: flutter build macos
       
+      - name: Create ZIP file (MacOS)
+        if: ${{ runner.os == 'macOS' }}
+        run: 7z a wormhole.zip ./build/macos/Build/Products/Release/*
+      
       - name: Upload artifact
-        if: ${{ runner.os == 'Windows' }}
         uses: actions/upload-artifact@v3.1.2
         with:
           path: wormhole.zip
