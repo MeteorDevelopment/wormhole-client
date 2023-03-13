@@ -23,6 +23,7 @@ jobs:
       - name: Build
         uses: docker/build-push-action@v4
         with:
+          context: .
           file: /web.Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_REPO }}:latest,${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_REPO }}:${{ github.sha }}
