@@ -7,7 +7,10 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        os: [ "windows-latest", "macos-latest" ]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -17,15 +20,21 @@ jobs:
         with:
           channel: stable
       
-      - name: Build
+      - name: Build (Windows)
+        if: ${{ runner.os == "Windows" }}
         run: flutter build windows
       
-      - name: Create ZIP file
-        run: 7z a wormhole-windows.zip ./build/windows/runner/Release/*
+      - name: Create ZIP file (Windows)
+        if: ${{ runner.os == "Windows" }}
+        run: 7z a wormhole.zip ./build/windows/runner/Release/*
+      
+      - name: Build (MacOS)
+        if: ${{ runner.os == "macOS" }}
+        run: flutter build macos
       
       - name: Upload artifact
+        if: ${{ runner.os == "Windows" }}
         uses: actions/upload-artifact@v3.1.2
         with:
-          name: wormhole-windows
-          path: wormhole-windows.zip
+          path: wormhole.zip
           
