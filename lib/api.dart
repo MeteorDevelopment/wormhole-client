@@ -8,7 +8,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:wormhole/log.dart';
 import 'package:wormhole/providers.dart';
 
-const _apiUrl = "157.90.39.249:3000";
+const _apiUrl = "api.wormhole.club";
 WebSocketChannel? channel;
 
 Future<dynamic> apiPost(String path, Object? body) async {
