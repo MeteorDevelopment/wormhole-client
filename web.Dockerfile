@@ -15,4 +15,4 @@ WORKDIR /app
 
 COPY --from=build /build/web .
 
-CMD [ "caddy", "file-server", "--listen", ":3001" ]
+CMD [ "caddy", "file-server" ]
