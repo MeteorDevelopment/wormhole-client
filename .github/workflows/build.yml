@@ -21,19 +21,19 @@ jobs:
           channel: stable
       
       - name: Build (Windows)
-        if: ${{ runner.os == "Windows" }}
+        if: ${{ runner.os == 'Windows' }}
         run: flutter build windows
       
       - name: Create ZIP file (Windows)
-        if: ${{ runner.os == "Windows" }}
+        if: ${{ runner.os == 'Windows' }}
         run: 7z a wormhole.zip ./build/windows/runner/Release/*
       
       - name: Build (MacOS)
-        if: ${{ runner.os == "macOS" }}
+        if: ${{ runner.os == 'macOS' }}
         run: flutter build macos
       
       - name: Upload artifact
-        if: ${{ runner.os == "Windows" }}
+        if: ${{ runner.os == 'Windows' }}
         uses: actions/upload-artifact@v3.1.2
         with:
           path: wormhole.zip
