@@ -26,7 +26,14 @@ jobs:
       
       - name: Create ZIP file (Windows)
         if: ${{ runner.os == 'Windows' }}
-        run: 7z a wormhole.zip ./build/windows/runner/Release/*
+        run: 7z a -tzip wormhole ./build/windows/runner/Release/*
+      
+      - name: Upload artifact (Windows)
+        if: ${{ runner.os == 'Windows' }}
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: wormhole-windows
+          path: wormhole.zip
       
       - name: Build (MacOS)
         if: ${{ runner.os == 'macOS' }}
@@ -34,10 +41,12 @@ jobs:
       
       - name: Create ZIP file (MacOS)
         if: ${{ runner.os == 'macOS' }}
-        run: 7z a wormhole.zip ./build/macos/Build/Products/Release/*
+        run: 7z a -tzip wormhole ./build/macos/Build/Products/Release/*
       
-      - name: Upload artifact
+      - name: Upload artifact (MacOS)
+        if: ${{ runner.os == 'macOS' }}
         uses: actions/upload-artifact@v3.1.2
         with:
+          name: wormhole-macos
           path: wormhole.zip
           
