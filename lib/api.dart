@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/status.dart' as status;
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:wormhole/log.dart';
@@ -27,7 +26,7 @@ Future<void> connectChannel() async {
 
   try {
     log.info("Connecting to web socket");
-    channel = WebSocketChannel.connect(Uri.parse("ws://$_apiUrl/connect?token=${container.read(tokenProvider)}"));
+    channel = WebSocketChannel.connect(Uri.parse("wss://$_apiUrl/connect?token=${container.read(tokenProvider)}"));
 
     await channel!.ready;
     log.info("Connected");
